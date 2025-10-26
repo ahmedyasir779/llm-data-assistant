@@ -11,6 +11,13 @@ Build an intelligent assistant that can:
 - Provide data cleaning recommendations
 - Create visualizations based on requests
 
+### Branches
+- `main` - Production-ready code (tagged releases only)
+- `dev` - Active development (daily commits)
+
+# Tag version
+git tag -a v2.X.0 -m "Week X complete"
+
 ## 🚀 Quick Start
 ```bash
 # Clone

@@ -1,8 +1,3 @@
-"""
-Test different prompt engineering techniques
-See what works best!
-"""
-
 import sys
 from pathlib import Path
 
