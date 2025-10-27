@@ -1,8 +1,8 @@
 from typing import List, Dict, Any, Optional
 import pandas as pd
 
-from .llm_client import SimpleLLM
-from .prompt_templates import PromptTemplates
+from llm_client import SimpleLLM
+from prompt_templates import PromptTemplates
 
 class DataTextGenerator:
     def __init__(self):

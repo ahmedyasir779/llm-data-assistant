@@ -1,0 +1,21 @@
+product_id,product_name,category,price,rating,reviews_count,stock,sales_last_month
+1,Laptop Pro,Electronics,1299.99,4.5,1250,45,89
+2,Wireless Mouse,Accessories,29.99,4.2,890,120,234
+3,Keyboard RGB,Accessories,89.99,4.7,670,85,156
+4,"Monitor 27""",Electronics,449.99,4.8,1250,30,67
+5,Webcam HD,Electronics,79.99,4.1,890,65,112
+6,USB Cable,Accessories,9.99,3.9,670,200,445
+7,Headphones,Electronics,149.99,4.6,420,50,198
+8,Phone Case,Accessories,19.99,4.3,560,150,378
+9,Tablet Stand,Accessories,34.99,4.4,340,90,201
+10,Power Bank,Electronics,49.99,4.5,980,110,267
+11,HDMI Cable,Accessories,12.99,4.0,230,180,334
+12,USB Hub,Accessories,39.99,4.2,410,75,189
+13,Laptop Bag,Accessories,59.99,4.6,520,60,145
+14,Mouse Pad,Accessories,14.99,4.1,780,95,223
+15,Phone Charger,Accessories,24.99,4.3,650,140,312
+16,Screen Protector,Accessories,9.99,3.8,290,210,401
+17,Stylus Pen,Accessories,29.99,4.4,340,100,178
+18,Cable Organizer,Accessories,12.99,4.2,510,130,256
+19,Desk Lamp,Electronics,44.99,4.5,180,55,134
+20,Phone Holder,Accessories,19.99,4.0,390,170,289

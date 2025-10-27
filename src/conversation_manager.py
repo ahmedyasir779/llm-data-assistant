@@ -4,8 +4,8 @@ from typing import List, Dict, Optional
 from datetime import datetime
 import json
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from src.llm_client import SimpleLLM
+# sys.path.insert(0, str(Path(__file__).parent.parent))
+from llm_client import SimpleLLM
 
 
 class ConversationManager:
