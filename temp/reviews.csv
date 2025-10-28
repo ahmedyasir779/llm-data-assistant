@@ -1,0 +1,51 @@
+review_id,product_id,rating,review_text,verified_purchase,helpful_votes
+1,1,5,Amazing laptop! Super fast and great build quality.,True,45
+2,1,4,Good but a bit pricey. Performance is excellent though.,True,23
+3,2,5,Best mouse I've ever used. Very comfortable.,True,67
+4,2,4,"Works well, battery life could be better.",False,12
+5,3,5,RGB lighting is stunning! Great for gaming.,True,89
+6,3,5,"Solid keyboard, keys feel great.",True,34
+7,4,5,Perfect monitor for work. Colors are accurate.,True,56
+8,4,4,Good monitor but stand is a bit wobbly.,True,28
+9,5,4,Clear video quality. Easy to set up.,False,41
+10,5,5,Does the job. Nothing special but works.,True,19
+11,1,4,Amazing laptop! Super fast and great build quality.,True,45
+12,1,5,Good but a bit pricey. Performance is excellent though.,True,23
+13,2,4,Best mouse I've ever used. Very comfortable.,True,67
+14,2,4,"Works well, battery life could be better.",False,12
+15,3,5,RGB lighting is stunning! Great for gaming.,True,89
+16,3,4,"Solid keyboard, keys feel great.",True,34
+17,4,5,Perfect monitor for work. Colors are accurate.,True,56
+18,4,5,Good monitor but stand is a bit wobbly.,True,28
+19,5,4,Clear video quality. Easy to set up.,False,41
+20,5,4,Does the job. Nothing special but works.,True,19
+21,1,5,Amazing laptop! Super fast and great build quality.,True,45
+22,1,4,Good but a bit pricey. Performance is excellent though.,True,23
+23,2,4,Best mouse I've ever used. Very comfortable.,True,67
+24,2,5,"Works well, battery life could be better.",False,12
+25,3,5,RGB lighting is stunning! Great for gaming.,True,89
+26,3,4,"Solid keyboard, keys feel great.",True,34
+27,4,5,Perfect monitor for work. Colors are accurate.,True,56
+28,4,4,Good monitor but stand is a bit wobbly.,True,28
+29,5,5,Clear video quality. Easy to set up.,False,41
+30,5,4,Does the job. Nothing special but works.,True,19
+31,1,4,Amazing laptop! Super fast and great build quality.,True,45
+32,1,5,Good but a bit pricey. Performance is excellent though.,True,23
+33,2,5,Best mouse I've ever used. Very comfortable.,True,67
+34,2,4,"Works well, battery life could be better.",False,12
+35,3,4,RGB lighting is stunning! Great for gaming.,True,89
+36,3,5,"Solid keyboard, keys feel great.",True,34
+37,4,5,Perfect monitor for work. Colors are accurate.,True,56
+38,4,4,Good monitor but stand is a bit wobbly.,True,28
+39,5,4,Clear video quality. Easy to set up.,False,41
+40,5,5,Does the job. Nothing special but works.,True,19
+41,1,5,Amazing laptop! Super fast and great build quality.,True,45
+42,1,4,Good but a bit pricey. Performance is excellent though.,True,23
+43,2,4,Best mouse I've ever used. Very comfortable.,True,67
+44,2,5,"Works well, battery life could be better.",False,12
+45,3,5,RGB lighting is stunning! Great for gaming.,True,89
+46,3,4,"Solid keyboard, keys feel great.",True,34
+47,4,5,Perfect monitor for work. Colors are accurate.,True,56
+48,4,4,Good monitor but stand is a bit wobbly.,True,28
+49,5,4,Clear video quality. Easy to set up.,False,41
+50,5,5,Does the job. Nothing special but works.,True,19

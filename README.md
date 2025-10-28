@@ -33,8 +33,11 @@ pip install -r requirements.txt
 cp .env.example .env
 # Add your Groq API key to .env
 
-# Test
-python src/llm_client.py
+# Create sample data
+python create_sample_data.py
+
+# Run app
+streamlit run app.py
 ```
 
 ## Get Groq API Key (FREE!)
@@ -47,29 +50,29 @@ python src/llm_client.py
 ## Tech Stack
 
 - **LLM Provider:** Groq (FREE)
-- **Model:** Llama 3 (8B parameters)
+- **Model:** qwen/qwen3-32b
 - **Language:** Python 3.9+
 - **Framework:** Custom (learning-focused)
-- **Coming:** ChromaDB, Streamlit, Docker
+- **Coming:** ChromaDB, Docker
 
-## Learning Resources
+## UI Improvements:
+- Beautiful dark chat bubbles (user: dark blue, assistant: dark gray)
+- Modern CSS with gradients and animations
+- Responsive design with proper spacing
+- Quick action buttons with icons
+- Enhanced sidebar with dataset info
+- Export conversation functionality
 
-This project follows structured learning:
-- Week 5: LLM fundamentals
-- Week 6: Prompt engineering
-- Week 7: RAG implementation
-- Week 8: Production deployment
+## Sample Data:
+- products.csv: 20 realistic e-commerce products
+- reviews.csv: 50 customer reviews with ratings
+- sales.csv: 1,500 transactions across 90 days
+- All datasets include realistic, clean data
 
 ## Related Projects
 
 - [Month 1: Data & Text Pipeline](https://github.com/ahmedyasir779/data-text-pipeline) - NLP & Data Processing (Live: https://data-text-pipeline.onrender.com)
 
-## Progress
-```
-Week 5: [███░░░░░] Day 1/7 (14%)
-Month 2: [█░░░░░░░] Week 1/4 (25%)
-Roadmap: [████░░░░] Month 2/4 (50%)
-```
 
 ## Author
 
