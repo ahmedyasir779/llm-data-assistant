@@ -1,8 +1,8 @@
-# 🤖 LLM Data Assistant
+# LLM Data Assistant
 
 AI-powered data analysis assistant using Large Language Models (Groq) and Retrieval-Augmented Generation.
 
-## 🎯 Project Goal
+## Project Goal
 
 Build an intelligent assistant that can:
 - Analyze datasets using natural language
@@ -18,7 +18,7 @@ Build an intelligent assistant that can:
 # Tag version
 git tag -a v2.X.0 -m "Week X complete"
 
-## 🚀 Quick Start
+## Quick Start
 ```bash
 # Clone
 git clone https://github.com/ahmedyasir779/llm-data-assistant.git
@@ -37,14 +37,14 @@ cp .env.example .env
 python src/llm_client.py
 ```
 
-## 🔑 Get Groq API Key (FREE!)
+## Get Groq API Key (FREE!)
 
 1. Visit: https://console.groq.com
 2. Sign up (no credit card needed)
 3. Get API key
 4. Add to `.env` file
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **LLM Provider:** Groq (FREE)
 - **Model:** Llama 3 (8B parameters)
@@ -52,7 +52,7 @@ python src/llm_client.py
 - **Framework:** Custom (learning-focused)
 - **Coming:** ChromaDB, Streamlit, Docker
 
-## 📚 Learning Resources
+## Learning Resources
 
 This project follows structured learning:
 - Week 5: LLM fundamentals
@@ -60,25 +60,25 @@ This project follows structured learning:
 - Week 7: RAG implementation
 - Week 8: Production deployment
 
-## 🔗 Related Projects
+## Related Projects
 
 - [Month 1: Data & Text Pipeline](https://github.com/ahmedyasir779/data-text-pipeline) - NLP & Data Processing (Live: https://data-text-pipeline.onrender.com)
 
-## 📊 Progress
+## Progress
 ```
 Week 5: [███░░░░░] Day 1/7 (14%)
 Month 2: [█░░░░░░░] Week 1/4 (25%)
 Roadmap: [████░░░░] Month 2/4 (50%)
 ```
 
-## 👤 Author
+## Author
 
 **Ahmed Yasir**
 - GitHub: [@ahmedyasir779](https://github.com/ahmedyasir779)
-- LinkedIn: [Your Profile]
+- LinkedIn: www.linkedin.com/in/ahmed-yasir-907561206
 - Building in public | Shipping every week
 
-## 📄 License
+## License
 
 MIT License - Free to use and learn from
 
