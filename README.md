@@ -2,14 +2,17 @@
 
 AI-powered data analysis assistant using Large Language Models (Groq) and Retrieval-Augmented Generation.
 
-## Project Goal
+🌐 **[Try the Live Demo](http://localhost:8501)** | 📚 **[Week 5 Summary](WEEK5_SUMMARY.md)**
 
-Build an intelligent assistant that can:
-- Analyze datasets using natural language
-- Answer questions about your data
-- Generate insights and summaries
-- Provide data cleaning recommendations
-- Create visualizations based on requests
+## 🎯 What's New in v2.1.0
+
+- ✅ **Modern Web Interface** - Beautiful Streamlit app with dark theme
+- ✅ **Natural Language Chat** - Ask questions about your data in plain English
+- ✅ **Latest AI Models** - Groq Llama 3.1-8B-Instant integration
+- ✅ **Smart Data Analysis** - Automatic insights and report generation
+- ✅ **Export Functionality** - Download conversations and reports
+- ✅ **Mobile Responsive** - Works perfectly on all devices
+
 
 ### Branches
 - `main` - Production-ready code (tagged releases only)
@@ -30,8 +33,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Configure
-cp .env.example .env
 # Add your Groq API key to .env
+echo "GROQ_API_KEY=your_key_here" > .env
 
 # Create sample data
 python create_sample_data.py
