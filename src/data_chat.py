@@ -1,7 +1,7 @@
 from typing import Optional, Dict, Any
-from data_loader import DataLoader
-from conversation_manager import DataConversation
-from text_generator import DataTextGenerator
+from .data_loader import DataLoader
+from .conversation_manager import DataConversation
+from .text_generator import DataTextGenerator
 import json
 
 

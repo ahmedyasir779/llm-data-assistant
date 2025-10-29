@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 # sys.path.insert(0, str(Path(__file__).parent.parent))
-from llm_client import SimpleLLM
+from .llm_client import SimpleLLM
 
 
 class ConversationManager:
