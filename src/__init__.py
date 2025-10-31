@@ -13,6 +13,14 @@ from .chromadb_preview import DataVectorStore
 from .rag_engine import RAGQueryEngine
 from .vector_store_advanced import AdvancedVectorStore
 
+from .embedding_manager import (
+    EmbeddingModelManager,
+    EmbeddingBenchmark,
+    recommend_model
+)
+from .embedding_cache import EmbeddingCache, SmartEmbeddingManager
+
 __all__ = ['SimpleLLM', 'PromptTemplates', 'DataTextGenerator', 'DataChat', 'DataLoader', 'DataConversation', 
-           'EnhancedLLMClient', 'SmartVisualizer', 'DataVectorStore', 'RAGQueryEngine', 'AdvancedVectorStore']
+           'EnhancedLLMClient', 'SmartVisualizer', 'DataVectorStore', 'RAGQueryEngine', 'AdvancedVectorStore'
+           , 'EmbeddingModelManager', 'EmbeddingBenchmark', 'recommend_model', 'EmbeddingCache', 'SmartEmbeddingManager']
 __version__ = '2.1.0-dev'

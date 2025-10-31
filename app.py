@@ -7,6 +7,8 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
+from src.embedding_manager import EmbeddingModelManager
+
 from src.enhanced_llm_client import EnhancedLLMClient
 from src.smart_visualizer import SmartVisualizer
 from src.chromadb_preview import DataVectorStore
@@ -158,6 +160,33 @@ with st.sidebar:
         stats = st.session_state.vector_store.get_collection_stats()
         st.caption(f"📊 {stats['total_documents']} documents indexed")
     
+    # RAG Configuration (in sidebar)
+    st.subheader("⚙️ RAG Configuration")
+
+    # Model selection
+    model_type = st.selectbox(
+        "🧠 Embedding Model",
+        options=["mini", "small", "fast", "multilingual"],
+        index=0,
+        help="Choose embedding model (mini recommended)"
+    )
+
+    # Update model if changed
+    if "current_model" not in st.session_state:
+        st.session_state.current_model = "mini"
+
+    if model_type != st.session_state.current_model:
+        st.session_state.current_model = model_type
+        st.session_state.vector_store = AdvancedVectorStore(
+            embedding_model=EmbeddingModelManager.AVAILABLE_MODELS[model_type]["name"]
+        )
+        st.success(f"✅ Switched to {model_type} model")
+        st.rerun()
+
+    # Model info
+    model_info = EmbeddingModelManager.AVAILABLE_MODELS[model_type]
+    st.caption(f"📊 {model_info['dim']} dims | {model_info['speed']} | {model_info['quality']} quality")
+
     st.divider()
     
     if st.button("🔄 Clear All", use_container_width=True):
