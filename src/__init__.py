@@ -10,6 +10,9 @@ from .enhanced_llm_client import EnhancedLLMClient
 from .smart_visualizer import SmartVisualizer
 from .chromadb_preview import DataVectorStore
 
+from .rag_engine import RAGQueryEngine
+from .vector_store_advanced import AdvancedVectorStore
+
 __all__ = ['SimpleLLM', 'PromptTemplates', 'DataTextGenerator', 'DataChat', 'DataLoader', 'DataConversation', 
-           'EnhancedLLMClient', 'SmartVisualizer', 'DataVectorStore']
+           'EnhancedLLMClient', 'SmartVisualizer', 'DataVectorStore', 'RAGQueryEngine', 'AdvancedVectorStore']
 __version__ = '2.1.0-dev'

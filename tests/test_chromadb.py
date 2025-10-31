@@ -1,8 +1,3 @@
-"""
-LLM Data Assistant - Enhanced Version
-Day 35: Advanced Features + ChromaDB Preview
-"""
-
 import streamlit as st
 import pandas as pd
 import sys
@@ -10,7 +5,7 @@ from pathlib import Path
 import json
 
 # Add src to path
-sys.path.insert(0, str(Path(__file__).parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.enhanced_llm_client import EnhancedLLMClient
 from src.smart_visualizer import SmartVisualizer
@@ -128,29 +123,29 @@ def create_data_analysis_prompt(all_datasets_info: str, question: str) -> list:
             "role": "system",
             "content": """You are an expert data analyst assistant. You have access to the complete datasets below.
 
-IMPORTANT RULES:
-1. Answer questions based on the ACTUAL DATA provided
-2. When asked about specific values (max, min, average, etc.), calculate from the data shown
-3. Be specific with numbers - don't give generic answers
-4. If asked to compare, analyze the actual rows provided
-5. Suggest visualizations when appropriate
-6. Be conversational and helpful
+            IMPORTANT RULES:
+            1. Answer questions based on the ACTUAL DATA provided
+            2. When asked about specific values (max, min, average, etc.), calculate from the data shown
+            3. Be specific with numbers - don't give generic answers
+            4. If asked to compare, analyze the actual rows provided
+            5. Suggest visualizations when appropriate
+            6. Be conversational and helpful
 
-FORMAT YOUR ANSWERS:
-- Use bullet points for lists
-- Include specific numbers and values
-- Mention row/column names when relevant
-- Keep answers clear and concise"""
+            FORMAT YOUR ANSWERS:
+            - Use bullet points for lists
+            - Include specific numbers and values
+            - Mention row/column names when relevant
+            - Keep answers clear and concise"""
         },
         {
             "role": "user",
             "content": f"""Here is the complete dataset information:
 
-{all_datasets_info}
+            {all_datasets_info}
 
-QUESTION: {question}
+            QUESTION: {question}
 
-Please analyze the data above and provide a specific, detailed answer based on the actual values shown."""
+            Please analyze the data above and provide a specific, detailed answer based on the actual values shown."""
         }
     ]
     

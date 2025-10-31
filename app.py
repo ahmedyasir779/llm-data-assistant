@@ -1,8 +1,3 @@
-"""
-LLM Data Assistant - Enhanced Version
-Day 35: Advanced Features + ChromaDB Preview
-"""
-
 import streamlit as st
 import pandas as pd
 import sys
@@ -15,6 +10,8 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 from src.enhanced_llm_client import EnhancedLLMClient
 from src.smart_visualizer import SmartVisualizer
 from src.chromadb_preview import DataVectorStore
+from src.vector_store_advanced import AdvancedVectorStore
+from src.rag_engine import RAGQueryEngine
 
 # Page config
 st.set_page_config(
@@ -45,6 +42,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Initialize session state
+# Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
 if "datasets" not in st.session_state:
@@ -56,9 +54,14 @@ if "llm_client" not in st.session_state:
         st.error("⚠️ GROQ_API_KEY not found! Add it to .env file")
         st.stop()
 if "vector_store" not in st.session_state:
-    st.session_state.vector_store = DataVectorStore()
+    st.session_state.vector_store = AdvancedVectorStore()  
+if "rag_engine" not in st.session_state:
+    st.session_state.rag_engine = RAGQueryEngine(
+        llm_client=st.session_state.llm_client,
+        vector_store=st.session_state.vector_store
+    )
 if "use_rag" not in st.session_state:
-    st.session_state.use_rag = False
+    st.session_state.use_rag = True  
 
 def load_data(uploaded_file) -> pd.DataFrame:
     """Load data from uploaded file"""
@@ -133,19 +136,27 @@ with st.sidebar:
     st.divider()
     
     # RAG toggle
-    st.subheader("⚙️ Advanced")
+    st.subheader("⚙️ Advanced RAG")
     use_rag = st.toggle(
-        "🔍 Enable RAG",
+        "🔍 Enable RAG Search",
         value=st.session_state.use_rag,
-        help="Use ChromaDB for semantic search"
+        help="Use ChromaDB vector store for semantic search"
     )
+
     
     if use_rag != st.session_state.use_rag:
         st.session_state.use_rag = use_rag
         if use_rag:
             for name, df in st.session_state.datasets.items():
                 st.session_state.vector_store.add_dataframe_context(df, name)
-            st.success("✅ RAG enabled")
+            st.success("✅ RAG enabled - datasets indexed")
+        else:
+            st.info("ℹ️ RAG disabled - using direct data access")
+
+    # Show vector store stats
+    if st.session_state.use_rag:
+        stats = st.session_state.vector_store.get_collection_stats()
+        st.caption(f"📊 {stats['total_documents']} documents indexed")
     
     st.divider()
     
@@ -228,28 +239,30 @@ if st.session_state.datasets:
     if submit and user_input:
         st.session_state.messages.append({"role": "user", "content": user_input})
         
-        with st.spinner("🤔 Thinking..."):
-            all_data_info = {}
-            for name, df in st.session_state.datasets.items():
-                all_data_info[name] = get_data_info(df)
-            
+        with st.spinner("🤔 Analyzing with RAG..." if st.session_state.use_rag else "🤔 Analyzing..."):
             if st.session_state.use_rag:
-                context = st.session_state.vector_store.get_relevant_context(user_input)
-                data_context = f"CONTEXT:\n{context}\n\nDATA:\n{all_data_info}"
+                # Use RAG engine
+                response = st.session_state.rag_engine.query_with_rag(
+                    user_input,
+                    st.session_state.datasets,
+                    n_context=3,
+                    use_hybrid=True
+                )
             else:
-                data_context = str(all_data_info)
+                # Use direct query
+                response = st.session_state.rag_engine.query_without_rag(
+                    user_input,
+                    st.session_state.datasets
+                )
             
-            response = st.session_state.llm_client.analyze_data(
-                {"context": data_context},
-                user_input
-            )
-            
+            # Check if visualization requested
             chart = None
-            if any(w in user_input.lower() for w in ['chart', 'plot', 'graph', 'visualiz']):
+            if any(word in user_input.lower() for word in ['chart', 'plot', 'graph', 'visualize', 'show']):
                 first_df = list(st.session_state.datasets.values())[0]
                 visualizer = SmartVisualizer(first_df)
                 chart = visualizer.auto_visualize()
             
+            # Add assistant message
             st.session_state.messages.append({
                 "role": "assistant",
                 "content": response,
@@ -258,4 +271,5 @@ if st.session_state.datasets:
         
         st.rerun()
 
-st.caption("Built with ❤️")
+st.caption("LLM Data Assistant v2.3.0: Full RAG | Built with ❤️ by Ahmed Yasir")
+st.caption("GitHub: [@ahmedyasir779](https://github.com/ahmedyasir779) | [LinkedIn](https://www.linkedin.com/in/ahmed-yasir-907561206)")
