@@ -5,7 +5,7 @@ from pathlib import Path
 import json
 
 # Add src to path
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.enhanced_llm_client import EnhancedLLMClient
 from src.smart_visualizer import SmartVisualizer

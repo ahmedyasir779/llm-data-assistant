@@ -20,7 +20,12 @@ from .embedding_manager import (
 )
 from .embedding_cache import EmbeddingCache, SmartEmbeddingManager
 
+from .query_classifier import QueryClassifier, QueryRewriter, QueryType, QueryIntent
+from .hybrid_search import HybridSearchEngine, ResultReranker, SearchRouter
+
 __all__ = ['SimpleLLM', 'PromptTemplates', 'DataTextGenerator', 'DataChat', 'DataLoader', 'DataConversation', 
            'EnhancedLLMClient', 'SmartVisualizer', 'DataVectorStore', 'RAGQueryEngine', 'AdvancedVectorStore'
-           , 'EmbeddingModelManager', 'EmbeddingBenchmark', 'recommend_model', 'EmbeddingCache', 'SmartEmbeddingManager']
+           , 'EmbeddingModelManager', 'EmbeddingBenchmark', 'recommend_model', 'EmbeddingCache', 'SmartEmbeddingManager'
+           , 'QueryClassifier', 'QueryRewriter', 'QueryType', 'QueryIntent', 'HybridSearchEngine', 'ResultReranker', 
+           'SearchRouter']
 __version__ = '2.1.0-dev'
