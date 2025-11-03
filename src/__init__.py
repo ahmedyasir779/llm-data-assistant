@@ -23,9 +23,12 @@ from .embedding_cache import EmbeddingCache, SmartEmbeddingManager
 from .query_classifier import QueryClassifier, QueryRewriter, QueryType, QueryIntent
 from .hybrid_search import HybridSearchEngine, ResultReranker, SearchRouter
 
+from src.token_manager import TokenManager, ContextWindow
+from src.context_compressor import ContextCompressor, RelevanceFilter
+
 __all__ = ['SimpleLLM', 'PromptTemplates', 'DataTextGenerator', 'DataChat', 'DataLoader', 'DataConversation', 
            'EnhancedLLMClient', 'SmartVisualizer', 'DataVectorStore', 'RAGQueryEngine', 'AdvancedVectorStore'
            , 'EmbeddingModelManager', 'EmbeddingBenchmark', 'recommend_model', 'EmbeddingCache', 'SmartEmbeddingManager'
            , 'QueryClassifier', 'QueryRewriter', 'QueryType', 'QueryIntent', 'HybridSearchEngine', 'ResultReranker', 
-           'SearchRouter']
+           'SearchRouter', 'TokenManager', 'ContextWindow', 'ContextCompressor', 'RelevanceFilter']
 __version__ = '2.1.0-dev'

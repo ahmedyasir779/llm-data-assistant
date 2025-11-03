@@ -3,6 +3,10 @@ from .enhanced_llm_client import EnhancedLLMClient
 from .vector_store_advanced import AdvancedVectorStore
 from .query_classifier import QueryClassifier, QueryRewriter
 from .hybrid_search import HybridSearchEngine, ResultReranker, SearchRouter
+
+from .token_manager import TokenManager, ContextWindow
+from .context_compressor import ContextCompressor, RelevanceFilter
+
 import pandas as pd
 
 
@@ -32,34 +36,60 @@ class RAGQueryEngine:
         self.reranker = ResultReranker()
         self.router = SearchRouter(self.hybrid_engine, self.reranker)
 
+        self.token_manager = TokenManager(max_tokens=4096)
+        self.compressor = ContextCompressor(compression_ratio=0.6)
+        self.relevance_filter = RelevanceFilter(min_relevance=0.3)
+        self.context_window = ContextWindow(max_messages=10, max_tokens=4096)
+
         print("✅ RAG Query Engine initialized")
     
     def query_with_rag(
-    self,
-    question: str,
-    datasets: Dict[str, pd.DataFrame],
-    n_context: int = 3,
-    use_hybrid: bool = True
-) -> str:
-        """Answer question using RAG with intelligent routing"""
+        self,
+        question: str,
+        datasets: Dict[str, pd.DataFrame],
+        n_context: int = 3,
+        use_hybrid: bool = True,
+        optimize_context: bool = True
+    ) -> str:
+        """Answer question using RAG with intelligent routing and optimization"""
         
         # Step 1: Classify query
         classification = self.classifier.classify_query(question)
         
-        # Step 2: Rewrite query for better results
-        query_variations = self.rewriter.rewrite_query(question, expand=True)
-        
-        # Step 3: Retrieve with primary query
-        context = self.vector_store.get_enhanced_context(
+        # Step 2: Retrieve with enhanced context
+        semantic_results = self.vector_store.semantic_search(
             question,
-            n_results=n_context * 2,  # Get more for re-ranking
-            include_keywords=use_hybrid
+            n_results=n_context * 3  # Get more for filtering
         )
         
-        # Step 4: Get semantic results for routing
-        semantic_results = self.vector_store.semantic_search(question, n_results=n_context * 2)
+        # Step 3: Optimize context if enabled
+        if optimize_context:
+            # Filter by relevance
+            filtered_docs, filtered_metas, scores = self.relevance_filter.filter_by_relevance(
+                semantic_results["documents"],
+                semantic_results["metadatas"],
+                question,
+                semantic_results.get("distances")
+            )
+            
+            # Remove duplicates
+            filtered_docs = self.compressor.remove_duplicates(filtered_docs)
+            
+            # Compress to target size
+            final_docs = self.compressor.compress_context(
+                filtered_docs,
+                question,
+                max_docs=n_context
+            )
+            
+            # Rebuild semantic results
+            semantic_results = {
+                "documents": final_docs,
+                "metadatas": filtered_metas[:len(final_docs)],
+                "distances": [1.0 - s for s in scores[:len(final_docs)]]
+            }
         
-        # Step 5: Route and optimize search if hybrid enabled
+        # Step 4: Route and search
         if use_hybrid and self.hybrid_engine.bm25_index:
             final_results = self.router.route_and_search(
                 question,
@@ -68,28 +98,53 @@ class RAGQueryEngine:
                 n_results=n_context
             )
             
-            # Use routed results for context
             context = "\n\n".join([
                 f"[{meta['type']}] {doc}"
                 for doc, meta in zip(final_results["documents"], final_results["metadatas"])
             ])
+        else:
+            context = self.vector_store.get_enhanced_context(question, n_results=n_context)
         
-        # Step 6: Get sample data
-        sample_data = self._get_relevant_samples(question, datasets)
+        # Step 5: Get sample data
+        sample_data = self._get_relevant_samples(question, datasets, max_rows=15)
         
-        # Step 7: Create enhanced prompt with classification info
-        messages = self._create_rag_prompt(
-            question,
-            context,
-            sample_data,
-            classification
-        )
+        # Step 6: Optimize token allocation
+        system_prompt = """You are an advanced data analysis assistant with RAG capabilities.
+
+            INSTRUCTIONS:
+            1. Use the RETRIEVED CONTEXT to understand the data structure
+            2. Use the SAMPLE DATA for specific value questions
+            3. Provide accurate, specific answers with numbers
+            4. Be concise but comprehensive"""
+
+        if optimize_context:
+            optimized = self.token_manager.optimize_context_allocation(
+                system_prompt=system_prompt,
+                context=context,
+                sample_data=sample_data,
+                question=question
+            )
+            
+            context = optimized["context"]
+            sample_data = optimized["sample_data"]
+            system_prompt = optimized["system_prompt"]
         
-        # Step 8: Generate response
+        # Step 7: Create prompt
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {
+                "role": "user",
+                "content": f"""CONTEXT:\n{context}\n\nDATA:\n{sample_data}\n\nQUESTION: {question}"""
+            }
+        ]
+        
+        # Step 8: Manage context window
+        messages = self.context_window.manage_messages(messages)
+        
+        # Step 9: Generate response
         response = self.llm.chat(messages, temperature=0.3)
         
         return response
-
     def query_without_rag(
         self,
         question: str,
