@@ -142,8 +142,6 @@ Response + Visualization
 
 ## 📈 Performance Metrics
 
-**From 42 Days of Development:**
-
 | Metric | Improvement |
 |--------|-------------|
 | Query Accuracy | +70% (advanced retrieval) |
@@ -232,22 +230,9 @@ pytest --cov=src tests/
 
 ---
 
-## 📖 Documentation
-
-- [42-Day Journey](JOURNEY.md) - Complete development timeline
-- [Deployment Checklist](DEPLOYMENT_CHECKLIST.md) - Production guide
-- [API Documentation](docs/API.md) - Component reference
-- [Configuration Guide](docs/CONFIG.md) - Settings reference
-
----
-
 ## 🎓 Learning Path
 
 This project was built over **42 days** as part of an AI/ML engineering learning journey:
-
-**Month 2 Highlights:**
-- **Week 5 (Days 29-35)**: LLM basics, chat interface, Streamlit UI
-- **Week 6 (Days 36-42)**: RAG implementation, hybrid search, production readiness
 
 **Skills Gained:**
 - LLM integration & prompt engineering
