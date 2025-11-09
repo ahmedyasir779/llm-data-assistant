@@ -1,7 +1,6 @@
 # LLM Data Assistant
 ![Status](https://img.shields.io/badge/status-production--ready-success)
 ![Python](https://img.shields.io/badge/python-3.9+-blue)
-![Days](https://img.shields.io/badge/days-42%2F42-green)
 ![Commits](https://img.shields.io/badge/commits-150+-orange)
 ![Tests](https://img.shields.io/badge/tests-50+-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -96,3 +95,4 @@ MIT License - Free to use and learn from
 
 **Status:** 🟢 Active Development
 #
+
