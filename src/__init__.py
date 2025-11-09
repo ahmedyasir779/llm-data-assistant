@@ -34,10 +34,18 @@ from .advanced_retrieval import (
 )
 from .retrieval_benchmark import RetrievalBenchmark
 
+from .error_handler import ErrorHandler, RetryHandler, ErrorSeverity, RetryStrategy, with_retry
+from .monitoring import PerformanceMonitor, ApplicationLogger, HealthCheck
+from .config import ConfigManager, ApplicationConfig
+
+from .integrated_system import LLMDataAssistant
+
 __all__ = ['SimpleLLM', 'PromptTemplates', 'DataTextGenerator', 'DataChat', 'DataLoader', 'DataConversation', 
            'EnhancedLLMClient', 'SmartVisualizer', 'DataVectorStore', 'RAGQueryEngine', 'AdvancedVectorStore'
            , 'EmbeddingModelManager', 'EmbeddingBenchmark', 'recommend_model', 'EmbeddingCache', 'SmartEmbeddingManager'
            , 'QueryClassifier', 'QueryRewriter', 'QueryType', 'QueryIntent', 'HybridSearchEngine', 'ResultReranker', 
            'SearchRouter', 'TokenManager', 'ContextWindow', 'ContextCompressor', 'RelevanceFilter', 'MultiQueryRetriever', 
-           'QueryDecomposer', 'IterativeRefiner', 'EnsembleRetriever', 'RetrievalBenchmark']
+           'QueryDecomposer', 'IterativeRefiner', 'EnsembleRetriever', 'RetrievalBenchmark', 'ErrorHandler', 'RetryHandler', 
+           'ErrorSeverity', 'RetryStrategy', 'with_retry', 'PerformanceMonitor', 'ApplicationLogger', 'HealthCheck', 
+           'ConfigManager', 'ApplicationConfig', 'LLMDataAssistant']
 __version__ = '2.1.0-dev'

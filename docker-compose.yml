@@ -1,0 +1,84 @@
+# LLM Data Assistant - Docker Compose
+
+version: '3.8'
+
+services:
+  llm-data-assistant:
+    build: .
+    container_name: llm-data-assistant
+    ports:
+      - "8501:8501"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - MODEL_NAME=${MODEL_NAME:-llama-3.1-8b-instant}
+      - TEMPERATURE=${TEMPERATURE:-0.7}
+      - MAX_TOKENS=${MAX_TOKENS:-2048}
+      - ENABLE_LOGGING=${ENABLE_LOGGING:-true}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - llm-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  llm-network:
+    driver: bridge
+
+volumes:
+  chroma_db:
+  data:
+  logs:
+  
+```
+
+### **Create:** `.dockerignore`
+```
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Data
+*.csv
+*.xlsx
+*.xls
+chroma_db/
+test_chroma/
+embedding_cache/
+
+# Docs
+*.md
+docs/
+
+# Tests
+tests/
+pytest_cache/
+
+# Misc
+.env.test
+*.log
+.DS_Store
